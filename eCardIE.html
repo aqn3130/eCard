@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script
+    src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha256-k2WSCIexGzOj3Euiig+TlR8gA0EmPjuc79OEeY5L45g="
+    crossorigin="anonymous"></script>
+
+<style>
+input[type=text],#div1{
+    width: inherit;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: list-item;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+
+}
+select{
+    width: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: list-item;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+.button {
+  display: inline-block;
+  padding: 8px 8px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #0088cc;
+  border: none;
+  border-radius: 4px;
+  box-shadow: 0 1px #999;
+}
+
+.button:hover {background-color: #0077cc}
+
+.button:active {
+  background-color: #0088cc;
+  box-shadow: 0 0px #666;
+  transform: translateY(3px);
+}
+
+label{
+  color: black;
+}
+details {
+    display: list-item;
+}
+#editor1 {
+      height: 40px;
+      width: 590px;
+      position: absolute;
+      left: auto;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      overflow: hidden;
+      resize: none;
+      white-space: nowrap;
+     }
+#sig{
+    height: 60px;
+      width: 590px;
+      position: absolute;
+      left: auto;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+      overflow: hidden;
+      resize: none;
+      white-space: nowrap;
+}
+#editor2 {
+    height: 200px;
+    width: 590px;
+    position: absolute;
+    left: auto;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display:block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: normal; 
+    }
+img{
+    cursor: pointer;
+}
+
+</style>
+</head>
+<body>
+
+<div id="div1" class="container">
+    <div>
+        <label for="cards">Pick eCard</label><br>
+        <img src="http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_abstract_590x500_1.png" width="10%" height="10%" onclick="loadSelectImage(0)">
+        <img src="http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_abstract_590x500_2.png" width="10%" height="10%" onclick="loadSelectImage(1)">
+        <img src="http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_abstract_590x500_3.png" width="10%" height="10%" onclick="loadSelectImage(2)">
+        <img src="http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_transformers_590x500_1.png" width="10%" height="10%" onclick="loadSelectImage(3)">
+        <img src="http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_transformers_590x500_2.png" width="10%" height="10%" onclick="loadSelectImage(4)">
+        <img src="http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_transformers_590x500_3.png" width="10%" height="10%" onclick="loadSelectImage(5)">
+    </div>
+    <hr>
+    <label for="colourFonts">Font Colour</label>
+    <select class="colourF" name="colourFonts" onchange="changeFontColour()" style="display:inline">
+      <option value="#486a7e">Dark</option>
+      <option value="#cedbe0" selected>White</option>
+      <option value="Gold">Gold</option>
+      <option value="Orange">Orange</option>
+    </select>
+
+    <label for="fontSize" style="display:inline;margin-left: 20px">Font Size</label>
+    <select id="fSize" name="fontSize" class="8-14" style="display:inline;" onchange="changeFontSize()">
+            <option value="10">10</option>
+            <option value="14" selected>14</option>
+    </select>
+    <label for="charCount" display="inline" style="display:inline;margin-left: 20px">Max 700 Characters</label>
+    <label id="charCount" display="" ></label>
+    <hr>
+
+    
+    <label for="title">Title</label>
+    <div id="editor1" name="title" onpaste="pasted()" contenteditable="true"></div>
+
+    <br /><br /><br /><br />
+
+    <label for="message">Message</label>
+    <div id="editor2" name="message" onpaste="pasted()" contenteditable="true"></div>
+
+    <br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+
+    <label for="signature">Signature</label>
+    <div id="sig" name="signature" onpaste="pasted()" contenteditable="true"></div>
+
+    <br /><br /><br /><br /><br />
+
+    <button class="button" type="button" display="inline" onclick="makeIt()">Add Content</button>
+    <a href="" id="cardDownload" onclick="downloadCard(this);">Download</a>
+    <br><br>
+
+    <label for ="help" style="font-family:Myriad,Verdana,Arial"><b>Follow the steps below to finalise your eCard</b></label>
+    <ul name="help" style="font-family:Myriad,Verdana,Arial;font-size:12px">
+        <li>Save - Right click the eCard and select Save</li>
+        <li>Edit - Edit text then Add Content again</li>
+        <li>Error - If content not showing in eCard refresh your browser and start again</li>
+        <li>Browser - For best result use Chrome or Firefox on Mac and Windows</li>
+        <li>Email - Compose a new mail and either attach or insert saved eCard from step-1</li>
+        <li>Print - Open eCard by double clicking saved file from step-1 then print</li>
+    </ul>
+
+</div>
+
+<canvas id="cardCanvas" width="590" height="500">
+Your browser does not support the HTML5 canvas tag.</canvas>
+
+<script>
+    var images = [];
+    var c = document.getElementById("cardCanvas");
+    var ctx = c.getContext("2d");
+    var isCaps = false;
+
+    //Preloading eCards
+    $(function(){
+        function preload(){
+            for (var i = 0; i < arguments.length; i++) {
+                images[i] = new Image();
+                images[i].src = preload.arguments[i];
+            }   
+        }
+        preload(
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_abstract_590x500_1.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_abstract_590x500_2.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_abstract_590x500_3.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_transformers_590x500_1.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_transformers_590x500_2.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x500/SN_HolidayCard_2018_transformers_590x500_3.png",
+
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x644/SN_HolidayCard_2018_abstract_590x644_1.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x644/SN_HolidayCard_2018_abstract_590x644_2.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x644/SN_HolidayCard_2018_abstract_590x644_3.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x644/SN_HolidayCard_2018_transformers_590x644_1.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x644/SN_HolidayCard_2018_transformers_590x644_2.png",
+            "http://shariftest.macmillan.com/eCard18/images/Holiday_card_590x644/SN_HolidayCard_2018_transformers_590x644_3.png"
+        )
+
+        //Add character count and re-add content after text edit
+        $("#editor2,#editor1,#sig").on("keyup",function(){
+            changeCard();      
+        });
+
+        $("#editor2").on("keyup",function(){
+
+            $("#charCount").text( $("#editor2").text().length )
+
+            var newSize = $(".8-14 option:checked").val();
+            if(newSize === "14"){
+                $("#editor2").css("line-height", 18+"pt");
+            }
+            else{
+                $("#editor2").css("line-height", 13+"pt");
+            }
+        });
+
+        $("#cardDownload").attr("href",c.toDataURL("image/png"));
+    });
+
+    function downloadCard(el){
+        el.href = c.toDataURL("image/png;base64");
+        window.open(el.href);
+    }
+    var imageNo = null;
+    function loadSelectImage(image){
+        imageNo = image;
+        c.height=500;
+        ctx.drawImage(images[image],0,0);
+    }
+    //Draw in to Canvas eCard after 1 second after loading page
+    setTimeout(function(){
+        c.height=500;
+        ctx.drawImage(images[0],0,0);
+    },1000);
+
+    function pasted(){
+        alert("For best results, copy and past from Notepad or TextEdit");
+    }
+
+    //Building eCard using canvas and svg
+    function makeIt(){
+        var title = $("#editor1").html().replace(/&nbsp;/g,'').replace(/<br>/g,'');
+        var message = $("#editor2").html().replace(/&nbsp;/g,'').replace(/<br>/g,'');
+        var signiture = $("#sig").html().replace(/&nbsp;/g,'').replace(/<br>/g,'');
+        ctx.fillStyle = "#cedbe0";
+        
+        // var img1 = new Image();
+        // img1.src = html_to_img(title,"nowrap");
+        // img1.onload = function() {
+        //     ctx.drawImage(img1, 35, 265);
+        // }
+
+        // var img2 = new Image();
+        // img2.src = html_to_img(message,"normal");
+        // img2.onload = function() {
+        //     ctx.drawImage(img2, 35, 295);
+        // }
+
+        // var img3 = new Image();
+        // img3.src = html_to_img(signiture,"nowrap");
+        // img3.onload = function() {
+        //     if( isCaps === true || $("#editor2").text().length > 302 || $("#editor2").find("div").length > 4 ) {
+        //         ctx.drawImage(img3, 35, 525);
+        //     }
+        //     else{
+        //         ctx.drawImage(img3, 35, 385);
+        //     }  
+        // }
+    }
+    //Changing font size
+    function changeFontSize(){
+        var newSize = $(".8-14 option:checked").val();
+        document.execCommand("fontSize", false, "7");
+        var fontElements = document.getElementsByTagName("font");
+        for (var i = 0, len = fontElements.length; i < len; ++i) {
+            if (fontElements[i].size == "7") {
+                fontElements[i].removeAttribute("size");
+                fontElements[i].style.fontSize = newSize+"px";
+            }
+        } 
+        changeCard(); 
+    }
+
+    //Changing font colour
+    function changeFontColour(){
+        var newColour = $(".colourF option:checked").val();
+        document.execCommand("foreColor", false, newColour);
+        changeCard();
+    }
+
+    //Disable return key for Title
+    $("#editor1").keypress(function(event){
+        if (event.which == '13') {
+            event.preventDefault();
+        }
+    });
+
+    //Prevent more than 8 blank line in message box
+    $("#editor2").keypress(
+        function(event){
+            if(event.which === 13){
+                if($("#editor2").find("div").length > 9)
+                event.preventDefault();  
+            }
+    });
+
+    //Prevent more than one blank line in signiture box
+    $("#sig").keypress(
+        function(event){
+            if(event.which === 13){
+                if ( $("#sig").find("div").length > 0 )
+                event.preventDefault();  
+                if ( $("#sig").text().length === 0 )
+                event.preventDefault();
+            }
+    });
+
+    //Character limit for div-1
+    $("#editor1").on("keydown",function(event) {
+        if($(this).text().length > 50 && event.keyCode != 8) {
+            event.preventDefault();
+        }
+    });
+
+    //Character limit for div-2
+    $("#editor2").on("keydown", function(event) {
+        if( isCaps === false ) {
+                if( $(this).text().length === 700 && event.keyCode != 8 ) {
+                event.preventDefault();
+            } 
+        }
+        else{
+            if( $(this).text().length === 500 && event.keyCode != 8 ) {
+                event.preventDefault();
+            }
+        }  
+    });
+
+    //Limit Signiture character length
+    $("#sig").on("keydown",function(event) {
+        if($(this).text().length > 70 && event.keyCode != 8) {
+            event.preventDefault();
+        }
+    });
+
+    //Check if caps lock is on
+    $(function(){
+        $("#editor2").keypress(function(e) {
+            var kc = e.which; //get keycode
+            var isUp = (kc >= 65 && kc <= 90) ? true : false; // uppercase
+            var isLow = (kc >= 97 && kc <= 122) ? true : false; // lowercase
+            // event.shiftKey does not seem to be normalized by jQuery(?) for IE8-
+            var isShift = ( e.shiftKey ) ? e.shiftKey : ( (kc == 16) ? true : false ); // shift is pressed
+        
+            // uppercase w/out shift or lowercase with shift == caps lock
+            if ( (isUp && !isShift) || (isLow && isShift) ) {
+                isCaps = true;
+            }
+        });
+    });
+
+    //Switch card for long messages
+    function changeCard(){
+        if( isCaps === true || $("#editor2").text().length > 302 || $("#editor2").find("div").length > 4 ) {
+            c.height = 645;
+            if(imageNo === 0)
+            ctx.drawImage(images[6],0,0);
+            if(imageNo === 1)
+            ctx.drawImage(images[7],0,0);
+            if(imageNo === 2)
+            ctx.drawImage(images[8],0,0);
+            if(imageNo === 3)
+            ctx.drawImage(images[9],0,0);
+            if (imageNo === 4)
+            ctx.drawImage(images[10],0,0);
+            if (imageNo === 5)
+            ctx.drawImage(images[11],0,0);
+        }
+        else{
+            c.height = 500;
+            if(imageNo === 0)
+            ctx.drawImage(images[0],0,0);
+            if(imageNo === 1)
+            ctx.drawImage(images[1],0,0);
+            if(imageNo === 2)
+            ctx.drawImage(images[2],0,0);
+            if(imageNo === 3)
+            ctx.drawImage(images[3],0,0);
+            if (imageNo === 4)
+            ctx.drawImage(images[4],0,0);
+            if (imageNo === 5)
+            ctx.drawImage(images[5],0,0);
+        }
+    }
+
+    //html to image
+    function html_to_img(html,wrapping) {
+        var data = 
+        '<svg xmlns="http://www.w3.org/2000/svg" width="520" height="200">' +
+        '<foreignObject width="100%" height="100%">' +
+        '<div xmlns="http://www.w3.org/1999/xhtml">' +
+        '<span style="color:#cedbe0; font-size:14px; white-space:' + wrapping + '; font-family:Myriad,Verdana,Arial">' +
+        html+'</span>' +
+        '</div>' +
+        '</foreignObject>' +
+        '</svg>';
+
+        var DOMURL = window.URL || window.webkitURL || window;
+        var svg = new Blob([data], { type: 'image/svg+xml;charset=utf-8' });
+        var url = DOMURL.createObjectURL(svg);
+        return url;
+    }
+
+</script>
+</body>
+</html>
